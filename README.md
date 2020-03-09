@@ -36,7 +36,9 @@ Desarrollar un servidor web que soporte los métodos `GET`, `POST`, `PUT`, `DELE
 
 ### Historias de usuario ###
 
-1. Como el navegador, quiero enviar una solicitud (*request*) 
+1. Como el navegador, quiero enviar al servidor una solicitud (*request*) con el método `GET`, para obtener un archivo almacenado en el sistema de archivos del servidor.
+
+2. Como el navegador, quiero enviar al servidor una solicitud (*request*) con el método `GET`, para invocar un método en el servidor.
 
 ### Recursos ###
 
