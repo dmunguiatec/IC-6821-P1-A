@@ -6,14 +6,14 @@ package edu.byohttp;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+
 public class ByoHttpTest {
 
     @Test
     @DisplayName("When constructing ByoHttp given port and resources path then return a new instance")
     public void testApp() {
-        ByoHttp app = new ByoHttp(1234, "/var/www");
+        new ByoHttp(1234, new File("/var/www"));
         // no exception thrown
     }
-
-
 }
