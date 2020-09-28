@@ -33,3 +33,5 @@ build
 .project
 .settings/
 .vscode/
+.idea/
+www/
