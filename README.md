@@ -4,6 +4,8 @@ Servidor HTTP.
 
 ## ¿Cómo configurar y compilar? ##
 
+Instalar Open JDK 11 (https://sdkman.io/)
+
 ```bash
 ./gradlew clean build
 ```
