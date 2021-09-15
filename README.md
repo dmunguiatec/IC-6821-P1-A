@@ -1,23 +1,50 @@
-# IC-6821 Proyecto 1 #
+# byohttp #
 
-Servidor HTTP.
+IC-6821 Diseño de Software  
+Proyecto 1  
 
-## ¿Cómo configurar y compilar? ##
+Build your own http server (byohttp).
 
-Instalar Open JDK 11 (https://sdkman.io/)
 
-```bash
-./gradlew clean build
-```
+## Cómo configurar y construir el software ##
 
-## ¿Cómo ejecutar? ##
+Para construir el software ejecutar
 
 ```bash
-./gradlew run --args='{PUERTO} {RUTA A RECURSOS}'
+./gradlew build
 ```
 
-por ejemplo
+Para ejecutar las pruebas automatizadas
 
 ```bash
-./gradlew run --args='80 /var/www'
+./gradlew test
 ```
+
+El reporte de pruebas se encuentra en `build/reports/tests/test/index.html`, para ver las pruebas
+
+```bash
+xdg-open build/reports/tests/test/index.html
+```
+
+## Cómo ejecutar el software ##
+
+Para ejecutar el software, primero es necesario construir el binario
+
+```bash
+ ./gradlew installDist
+ ```
+
+El binario estará disponible en la ruta `build/install/byohttp/bin`
+
+```bash
+cd build/install/byohttp/bin
+```
+
+Para ejecutar el binario
+
+```bash
+./byohttp {puerto} {ruta a recursos} {ruta a mapeo de tipos mime}
+```
+
+## Diseño ##
+

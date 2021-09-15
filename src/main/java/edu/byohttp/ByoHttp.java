@@ -10,10 +10,12 @@ public class ByoHttp {
 
     private final int port;
     private final File resourcesDirectory;
+    private final File mimeTypesMapping;
 
-    ByoHttp(int port, File resourcesDirectory) {
+    ByoHttp(int port, File resourcesDirectory, File mimeTypesMapping) {
         this.port = port;
         this.resourcesDirectory = resourcesDirectory;
+        this.mimeTypesMapping = mimeTypesMapping;
     }
 
     void run() {
@@ -42,8 +44,22 @@ public class ByoHttp {
             System.exit(1);
         }
 
-        ByoHttp app = new ByoHttp(port.getAsInt(), resourcePath.get());
+        Optional<File> mimeTypeMapping = validateMimeTypeMapping(args[2]);
+        if (mimeTypeMapping.isEmpty()) {
+            System.exit(1);
+        }
+
+        ByoHttp app = new ByoHttp(port.getAsInt(), resourcePath.get(), mimeTypeMapping.get());
         app.run();
+    }
+
+    private static Optional<File> validateMimeTypeMapping(String mimeTypeMappingArg) {
+        File mimeTypeMapping = new File(mimeTypeMappingArg);
+        if (!mimeTypeMapping.exists() || !mimeTypeMapping.isFile()) {
+            System.err.println("Argument <mime type mapping> should point to a file");
+            return Optional.empty();
+        }
+        return Optional.of(mimeTypeMapping);
     }
 
     private static Optional<File> validateResourcePath(String resourcePathArg) {
@@ -66,7 +82,7 @@ public class ByoHttp {
     }
 
     private static boolean validateArgsCount(String[] args) {
-        if (args.length != 2) {
+        if (args.length != 3) {
             printUsage();
             System.err.println("Invalid number of arguments");
             return false;
@@ -75,6 +91,6 @@ public class ByoHttp {
     }
 
     private static void printUsage() {
-        System.out.println("Usage: java ByoHttp <port number> <resources path>");
+        System.out.println("Usage: byohttp <port number> <resources path> <mime type mapping>");
     }
 }
