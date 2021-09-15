@@ -18,15 +18,21 @@ public class SocketMessageRunnable implements Runnable {
     @Override
     public void run() {
         try {
-            //TODO: cambiar este echo por una llamada para procesar el mensaje de request
-            new EchoMessage().echo(in, out);
+
+            /* TODO:
+                En este punto tenemos un hilo corriendo, con acceso al InputStream que permite leer los bytes del
+                request, y un OutputStream que permite escribir los bytes del response.
+                A partir de acá podemos procesar el request para producir el response.
+             */
 
             in.close();
             out.flush();
             out.close();
         } catch (IOException e) {
-            // TODO: esta es una mala práctica de manejo de errores, mejorar
-            e.printStackTrace();
+            /* TODO:
+                Esta es la frontera para nuestro código, pues el hilo corre de manera desprendida del main.
+                Acá deberíamos registrar este error inesperado en la bitácora para que no pase desapercibido.
+             */
         }
     }
 }
