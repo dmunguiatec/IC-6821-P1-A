@@ -5,12 +5,12 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
-public class SocketMessageRunnable implements Runnable {
+public final class SocketMessageRunnable implements Runnable {
 
     private final InputStream in;
     private final OutputStream out;
 
-    public SocketMessageRunnable(Socket socket) throws IOException {
+    public SocketMessageRunnable(final Socket socket) throws IOException {
         this.in = socket.getInputStream();
         this.out = socket.getOutputStream();
     }

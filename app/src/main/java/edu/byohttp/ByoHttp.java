@@ -6,13 +6,15 @@ import java.net.ServerSocket;
 import java.util.Optional;
 import java.util.OptionalInt;
 
-public class ByoHttp {
+public final class ByoHttp {
+
+    private static final int ARGS_COUNT = 3;
 
     private final int port;
     private final File resourcesDirectory;
     private final File mimeTypesMapping;
 
-    ByoHttp(int port, File resourcesDirectory, File mimeTypesMapping) {
+    ByoHttp(final int port, final File resourcesDirectory, final File mimeTypesMapping) {
         this.port = port;
         this.resourcesDirectory = resourcesDirectory;
         this.mimeTypesMapping = mimeTypesMapping;
@@ -34,27 +36,27 @@ public class ByoHttp {
             System.exit(1);
         }
 
-        OptionalInt port = validatePort(args[0]);
+        final OptionalInt port = validatePort(args[0]);
         if (port.isEmpty()) {
             System.exit(1);
         }
 
-        Optional<File> resourcePath = validateResourcePath(args[1]);
+        final Optional<File> resourcePath = validateResourcePath(args[1]);
         if (resourcePath.isEmpty()) {
             System.exit(1);
         }
 
-        Optional<File> mimeTypeMapping = validateMimeTypeMapping(args[2]);
+        final Optional<File> mimeTypeMapping = validateMimeTypeMapping(args[2]);
         if (mimeTypeMapping.isEmpty()) {
             System.exit(1);
         }
 
-        ByoHttp app = new ByoHttp(port.getAsInt(), resourcePath.get(), mimeTypeMapping.get());
+        final ByoHttp app = new ByoHttp(port.getAsInt(), resourcePath.get(), mimeTypeMapping.get());
         app.run();
     }
 
     private static Optional<File> validateMimeTypeMapping(String mimeTypeMappingArg) {
-        File mimeTypeMapping = new File(mimeTypeMappingArg);
+        final File mimeTypeMapping = new File(mimeTypeMappingArg);
         if (!mimeTypeMapping.exists() || !mimeTypeMapping.isFile()) {
             System.err.println("Argument <mime type mapping> should point to a file");
             return Optional.empty();
@@ -63,7 +65,7 @@ public class ByoHttp {
     }
 
     private static Optional<File> validateResourcePath(String resourcePathArg) {
-        File resourcePath = new File(resourcePathArg);
+        final File resourcePath = new File(resourcePathArg);
         if (!resourcePath.exists() || !resourcePath.isDirectory()) {
             System.err.println("Argument <resources path> should point to a directory");
             return Optional.empty();
@@ -73,7 +75,7 @@ public class ByoHttp {
 
     private static OptionalInt validatePort(String portArg) {
         try {
-            int port = Integer.parseUnsignedInt(portArg);
+            final int port = Integer.parseUnsignedInt(portArg);
             return OptionalInt.of(port);
         } catch (NumberFormatException nfe) {
             System.err.println("Argument <port number> should be a number");
@@ -82,7 +84,7 @@ public class ByoHttp {
     }
 
     private static boolean validateArgsCount(String[] args) {
-        if (args.length != 3) {
+        if (args.length != ARGS_COUNT) {
             printUsage();
             System.err.println("Invalid number of arguments");
             return false;
