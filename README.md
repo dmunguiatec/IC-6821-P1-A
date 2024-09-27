@@ -155,7 +155,44 @@ Connection: keep-alive
   - El puerto en el que escucha el socket.
   - La ruta en el sistema de archivos donde se encuentran los recursos servidos.
   - La asociación entre extensiones de archivo y tipos `MIME`.
-* El servidor debe mantener una bitácora (*log*) donde se registren todas las solicitudes recibidas y respuestas generadas. En primera instancia esta bitácora se enviará a la salida estándar (`stdout`). En el futuro se podrá configurar la salida a la que se enviará la bitácora.
+* El servidor debe mantener una bitácora (*log*) donde se registren todas las solicitudes recibidas y respuestas generadas, así como cualquier excepción inesperada y un mensaje de inicialización. En primera instancia esta bitácora se enviará a la salida estándar (`stdout`). En el futuro se podrá configurar la salida a la que se enviará la bitácora.
+  - Ejemplo de mensaje de inicialización
+```
+[INFO] byohttp server startup successful, listening on port 8000
+Mime type mapping file: ./mappings/mime.csv
+Resource directory: ./www
+```
+
+  - Ejemplo de mensaje de bitácora para solicitud
+```
+[REQUEST] 2024-09-26T14:30:00-06:00
+GET /helloworld.html HTTP/1.1
+User-Agent: PostmanRuntime/7.22.0
+Accept: */*
+Cache-Control: no-cache
+Host: localhost
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+```
+  - Ejemplo de mensaje de bitácora para respuesta
+```
+[RESPONSE] 2024-09-26T14:30:15-06:00
+HTTP/1.1 200 OK
+Server: byohttp/0.0.1
+Date: Tue, 10 Mar 2020 01:57:21 GMT
+Content-Type: text/html
+Content-Length: 95
+Last-Modified: Tue, 10 Mar 2020 01:57:00 GMT
+Connection: keep-alive
+Accept-Ranges: bytes
+```
+  - Ejemplo de mensaje de bitácora para excepción inesperada
+```
+[ERROR] 2024-09-26T14:30:15-06:00 java.lang.NullPointerException: Cannot invoke "Object.toString()" because "n" is null
+	at edu.byohttp.SocketMessageRunnable.run(SocketMessageRunnable.java:35)
+	at java.base/java.lang.Thread.run(Thread.java:1570)
+```
+
 * Cualquier error no esperado durante la resolución de una solicitud deberá manejarse como una respuesta `500 Internal Server Error`.
 * El stream de entrada del request nunca envía `EOF`, la lectura del request se debe detener al encontrar la primera línea en blanco.
 * En el futuro el servidor deberá soportar todos los métodos HTTP.
