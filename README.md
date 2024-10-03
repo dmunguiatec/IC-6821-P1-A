@@ -193,6 +193,7 @@ Accept-Ranges: bytes
 	at java.base/java.lang.Thread.run(Thread.java:1570)
 ```
 
+* Es necesario considerar que es posible que el cliente envíe una solicitud vacía o malformada (es decir, que no cumpla con la sintaxis de un *request*), en cuyo caso el servidor debe responder con `400 Bad Request`.
 * Cualquier error no esperado durante la resolución de una solicitud deberá manejarse como una respuesta `500 Internal Server Error`.
 * El stream de entrada del request nunca envía `EOF`, la lectura del request se debe detener al encontrar la primera línea en blanco.
 * En el futuro el servidor deberá soportar todos los métodos HTTP.
