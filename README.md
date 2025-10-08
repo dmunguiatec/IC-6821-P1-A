@@ -260,23 +260,32 @@ Accept-Ranges: bytes
 * [Referencia oficial HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP)
 * [Tipos MIME](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types)
 
-### Metodologia
 
-* El proyecto se desarrollará en grupos de 5 personas durante 3 semanas.
-* Durante el período del proyecto no trabajaremos en otras asignaciones ni en nuevos contenidos. El tiempo del curso será totalmente dedicado al proyecto.
-* Semanalmente cada equipo tendrá una sesión de revision con la persona docente para discutir el diseño, identificar mejoras y chequear el nivel de avance.
-* Cada equipo designará una persona con el rol de líder, este rol tiene tres responsabilidades:
-  - Coordinar reuniones de equipo
-  - Coordinar asignación de tareas
-  - Resolución de conflictos en la toma de decisiones
-* Cada equipo designará dos personas con el rol de relatoras, estas personas tendrán la responsabilidad de tomar notas durante las reuniones de revisión que serán utilizadas posteriormente para hacer mejoras al código.
+## Metodología
+
+* El proyecto se trabajará en equipos de 1, 2 o 3 personas.
+* El proyecto se desarrollará en el transcurso de tres semanas.
 * El proyecto se desarrollará en Java siguiendo el paradigma de programación orientada a objetos.
-* Se recomienda iniciar la implementación programando y subiendo al repositorio las interfaces. De esta forma todo el equipo tendrá disponible una base de código compilable para implementar cada uno de los módulos.
-* Se recomienda iniciar la implementación de abajo hacia arriba. Iniciando con las clases que tengan menos dependencias y avanzando progresivamente hacia las clases que tengan más dependencias.
-* Cada equipo entregará en el repositorio git el código que cumpla con los requerimientos funcionales establecidos.
-
+* La entrega del proyecto será a través del repositorio git facilitado por la persona docente.
+* El proyecto será evaluado a través de una rúbrica de evaluación global (50%) y a través de una prueba escrita individual aplicada a todas las personas miembros del equipo (50%).
+  
 ### Rúbricas de evaluación
 
 Disponibles en el siguiente enlace:
 
-https://docs.google.com/spreadsheets/d/157_JSr9W_S5ucpk_DU5fr-R_7m114QeJPWeymJjw6Zw
+[https://docs.google.com/spreadsheets/d/157_JSr9W_S5ucpk_DU5fr-R_7m114QeJPWeymJjw6Zw](https://docs.google.com/spreadsheets/d/1Ssoc2TsDZzofA2uUWjP13npnZ5BAyT-AqiNEutEYrZk/edit?usp=sharing)
+
+## Ambiente de desarrollo
+
+Ejecutar pruebas y reporte de cobertura
+
+```bash
+./gradlew clean test jacocoTestReport
+```
+
+Ejecutar checkstyle
+
+```bash
+./gradlew clean check
+```
+
